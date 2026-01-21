@@ -1,0 +1,41 @@
+name: Greetings
+
+on: [pull_request_target, issues]
+
+jobs:
+  greeting:
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+      pull-requests: write
+    steps:
+    - uses: actions/first-interaction@v1
+      with:
+        repo-token: ${{ secrets.GITHUB_TOKEN }}
+
+        issue-message: |
+          👋 Ciao e benvenuto su **PythonLauncher**!
+
+          Questa è una piattaforma **open source universale** pensata per:
+          - eseguire algoritmi in Python
+          - gestire ambienti multipli
+          - semplificare lo sviluppo di tool automatizzati
+
+          Grazie per aver aperto una issue 🙌  
+          Descrivi pure il problema o la tua idea nel modo più dettagliato possibile.
+
+          🚀 Ogni contributo aiuta a rendere PythonLauncher più potente e accessibile per tutti.
+
+        pr-message: |
+          🎉 Grazie per il tuo contributo a **PythonLauncher**!
+
+          PythonLauncher è una piattaforma **open source universale per algoritmi Python**,
+          progettata per offrire controllo, modularità e libertà totale allo sviluppatore.
+
+          La tua Pull Request verrà revisionata appena possibile 👀  
+          Se vuoi, puoi spiegare brevemente:
+          - cosa migliora
+          - perché è utile
+          - eventuali test effettuati
+
+          💙 Grazie per far crescere la community!
