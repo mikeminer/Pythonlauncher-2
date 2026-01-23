@@ -103,7 +103,7 @@ tzdata>=2024.1
 Installazione:
 
 ```bash
-py -3.11 -m pip install -r requirements.txt
+winget install --id Python.Python.3.11 -e
 ```
 
 ---
