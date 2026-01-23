@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Guardiano Anti-Martingala — ETH (Forlani Bank)
+Guardiano Anti-Martingala — ETH (by pappardelle.eth)
 Python 3.10+ | GUI Tkinter | Windows friendly
 
 Cosa fa:
@@ -24,7 +24,7 @@ try:
 except Exception:
     requests = None
 
-APP_TITLE = "Guardiano Anti-Martingala — ETH (Forlani Bank)"
+APP_TITLE = "Guardiano Anti-Martingala — ETH (by pappardelle.eth)"
 DEFAULT_SYMBOL = "ETHUSDT"
 
 
