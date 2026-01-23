@@ -3,6 +3,7 @@
 ### Disciplina prima del profitto
 
 > Un software in Python con interfaccia grafica che impedisce al trader di distruggere il conto mediando in modo emotivo.
+<img width="1307" height="767" alt="image" src="https://github.com/user-attachments/assets/37767f2d-9b30-47d4-81cd-6b69dafdbb34" />
 
 ---
 
