@@ -1,8 +1,8 @@
 <img width="623" height="448" alt="image" src="https://github.com/user-attachments/assets/6b68837c-4b3c-4f0e-b5bd-420291cd7cc8" />
 
-# 🚀 Trading Tools – Python Launcher & Crypto Analytics
+# 🚀 Trading Tools – Python Launcher &  Analytics
 
-Suite di **strumenti Python per analisi crypto, trading realtime e monitoraggio market maker**, con **launcher modulare per Windows**.
+Suite di **strumenti Python per analisi , trading realtime e monitoraggio market maker**, con **launcher modulare per Windows**.
 
 Il progetto nasce per gestire in modo ordinato più script Python (radar, reversal, strike, monitor websocket, dashboard... e anche script python personalizzati) utilizzando **un unico ambiente Python controllato**.
 
@@ -153,7 +153,7 @@ Questo progetto è a scopo:
 
 * educativo
 * sperimentale
-* di studio dei mercati crypto
+* di studio dei mercati 
 
 ❗ Non costituisce consulenza finanziaria.
 L’utilizzo è sotto responsabilità dell’utente.
