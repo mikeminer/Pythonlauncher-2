@@ -43,6 +43,7 @@ echo R  - Installa requirements.txt (pip -r)
 echo P  - Seleziona Python (salva default)
 echo L  - Lista Python installati
 echo H  - Apri Liquidation Heatmap (Coinglass)
+echo G  - Apri repository github
 echo Q  - Esci
 echo.
 set /p "SCELTA=>>> "
@@ -55,6 +56,7 @@ if /I "%SCELTA%"=="R" goto INSTALL_REQFILE
 if /I "%SCELTA%"=="P" goto SELECT_PYTHON
 if /I "%SCELTA%"=="L" goto LIST_PYTHON
 if /I "%SCELTA%"=="H" goto OPEN_HEATMAP
+if /I "%SCELTA%"=="G" goto OPEN_REPOSITORY
 if /I "%SCELTA%"=="Q" goto END
 
 goto MENU
@@ -189,6 +191,19 @@ echo =============================
 echo.
 echo Apro la pagina nel browser...
 start "" "https://www.coinglass.com/liquidation-levels"
+goto RETURN_MENU
+
+REM ===============================
+REM REPOSITORY GITHUB
+REM ===============================
+:OPEN_REPOSITORY
+cls
+echo =============================
+echo   repository - github
+echo =============================
+echo.
+echo Apro la pagina nel browser...
+start "" "https://github.com/mikeminer/Pythonlauncher-2/"
 goto RETURN_MENU
 
 REM ===============================
