@@ -1,30 +1,51 @@
-
 # 🧠 ETH/USDT Compression & MACD Monitor
 
-**KuCoin – Windows Desktop Tool**
+### KuCoin – Windows Desktop Tool
 
-Tool desktop in **Python (Tkinter)** per monitorare le fasi di **compressione di mercato**, il comportamento del **MACD** e individuare i momenti in cui i market maker **contengono** o **rilasciano** il prezzo.
+Desktop tool in **Python (Tkinter)** per monitorare **compressioni di mercato**, comportamento del **MACD** e fasi di **contenimento o rilascio del prezzo**.
 
-Pensato per trader discrezionali che vogliono **capire cosa sta succedendo dietro al movimento**, non solo vedere indicatori.
+Progettato per trader discrezionali che vogliono **capire cosa sta accadendo dietro al movimento del prezzo**, non limitarsi a leggere indicatori isolati.
+
+---
+
+## 🎯 Obiettivo del progetto
+
+Questo tool non nasce per “prevedere il mercato”.
+
+Nasce per **interpretare il comportamento strutturale del prezzo**, in particolare nei momenti in cui:
+
+* il mercato resta compresso
+* il momentum migliora ma il prezzo non segue
+* i breakout vengono continuamente rimandati
+* sembra che “qualcuno stia guadagnando tempo”
+
+L’obiettivo è fornire **consapevolezza**, non segnali automatici.
 
 ---
 
 ## 🚀 Funzionalità principali
 
-✅ Dashboard **desktop Windows** 
-✅ Grafico **Prezzo + Bollinger Bands**
+✅ Dashboard desktop Windows
+✅ Interfaccia grafica Tkinter (nessun browser richiesto)
+✅ Grafico prezzo con **Bollinger Bands**
 ✅ Grafico **MACD + Histogram**
-✅ Rilevamento automatico di:
+✅ Stream del prezzo in tempo reale (via dati pubblici KuCoin)
 
-* **Compressione di volatilità**
-* **Containment (MACD tenuto negativo artificialmente)**
-* **Release (possibile rilascio del prezzo)**
+### Rilevamento automatico di:
 
-✅ **Alert sonori Windows**
-✅ **Popup descrittivi**
-✅ Log eventi in tempo reale
-✅ Aggiornamento automatico ogni N secondi
-✅ Nessuna API key richiesta (usa OHLCV pubblici KuCoin)
+* 🔒 **Compressione di volatilità**
+* 🧲 **Containment (momentum trattenuto)**
+* 🚀 **Release (possibile rilascio del prezzo)**
+
+### Sistema di alert:
+
+* 🔊 suoni Windows
+* 🪟 popup descrittivi
+* 🧾 log eventi in tempo reale
+* ⏱️ cooldown automatico anti-spam
+
+✅ Nessuna API key richiesta
+✅ Utilizza esclusivamente endpoint pubblici KuCoin
 
 ---
 
@@ -34,9 +55,9 @@ Pensato per trader discrezionali che vogliono **capire cosa sta succedendo dietr
 
 * Exchange: **KuCoin**
 * Pair: **ETH/USDT**
-* Timeframe: **15m**
+* Timeframe: **15 minuti**
 
-Modificabili liberamente dall’interfaccia.
+Tutti i parametri sono **modificabili dall’interfaccia**.
 
 ---
 
@@ -47,33 +68,44 @@ Modificabili liberamente dall’interfaccia.
 * Upper Band
 * Middle Band (MB)
 * Lower Band
-* **BB Width** (ampiezza)
+* Bollinger Width (ampiezza)
 
-### 🔹 Compressione
+La Bollinger Width è utilizzata per valutare **la compressione della volatilità**, non per segnali di breakout diretti.
+
+---
+
+### 🔹 Compressione di volatilità
 
 La compressione viene calcolata tramite:
 
-* Percentile della Bollinger Width su finestra storica
+* analisi della **Bollinger Width**
+* confronto con il **percentile storico** su finestra mobile
 
-Quando la BB Width è nei **percentili più bassi**, il mercato è considerato in:
+Quando la BB Width si trova nei percentili più bassi, il mercato viene classificato come:
 
-> 🔒 **Compressione di volatilità**
+🔒 **fase di compressione**
+
+Questo approccio consente di evitare soglie statiche arbitrarie, adattando la lettura al comportamento storico del mercato.
 
 ---
 
 ### 🔹 MACD
 
-* Linea MACD
+Componenti utilizzati:
+
+* MACD line
 * Signal line
 * Histogram
 
-Usato non come “segnale long/short”, ma come **strumento di lettura del controllo del momentum**.
+Il MACD **non viene usato come segnale long/short**, ma come strumento di lettura del momentum interno.
+
+Serve a comprendere **se il momentum sta cambiando**, anche quando il prezzo non lo riflette ancora.
 
 ---
 
-## 🧠 Logica di mercato (parte importante)
+## 🧠 Logica di mercato (parte centrale del tool)
 
-Questo tool NON dice:
+Questo strumento **non dice**:
 
 > “compra” o “vendi”.
 
@@ -85,20 +117,21 @@ Serve a capire **cosa stanno facendo i market maker**.
 
 Si attiva quando:
 
-* MACD histogram **sta risalendo**
+* il MACD histogram **inizia a risalire**
 * ma resta **ancora sotto lo zero**
-* prezzo resta **vicino alla media Bollinger**
+* il prezzo rimane **vicino alla middle band**
 
 Interpretazione:
 
-> Il momentum vorrebbe girare positivo
-> ma il prezzo viene **tenuto sotto controllo**
+> Il momentum tende a migliorare,
+> ma il prezzo viene temporaneamente contenuto.
 
-Tipico comportamento di:
+Comportamento tipico di:
 
-* contenimento
 * accumulo mascherato
 * gestione del tempo
+* riduzione del rischio direzionale
+* controllo della volatilità
 
 ---
 
@@ -106,13 +139,16 @@ Tipico comportamento di:
 
 Si attiva quando:
 
-* Bollinger Width inizia a **riespandersi**
-* il prezzo chiude **sopra la middle band**
+* la Bollinger Width smette di contrarsi
+* inizia la **prima riespansione**
+* il prezzo **chiude sopra la middle band**
 
 Interpretazione:
 
 > Possibile rilascio della compressione
-> inizio movimento direzionale
+> e inizio di movimento direzionale.
+
+Non indica direzione certa, ma **transizione di regime**.
 
 ---
 
@@ -126,12 +162,12 @@ Ogni alert genera:
 
 Alert configurabili:
 
-* **Breakout sopra Upper Bollinger**
-* **MACD histogram > 0**
-* **Release flag**
-* **Containment flag**
+* Breakout sopra Upper Bollinger
+* MACD Histogram > 0
+* Containment Flag
+* Release Flag
 
-Gli alert hanno **cooldown automatico** per evitare spam.
+Tutti gli alert includono **cooldown automatico** per evitare notifiche ripetitive.
 
 ---
 
@@ -143,97 +179,81 @@ Gli alert hanno **cooldown automatico** per evitare spam.
 * Pair
 * Timeframe
 * Numero candele
-* Refresh secondi
+* Refresh in secondi
 * Parametri indicatori
-* Soglie compressione
+* Soglie di compressione
 * Attivazione alert
-* Start / Stop
+* Pulsanti Start / Stop
 
-> ⚠️ Se non vedi tutto: usa la **rotellina del mouse**
-> Il pannello è scrollabile.
+> ⚠️ Se non vedi tutti i controlli, usa la rotellina del mouse.
+> Il pannello è completamente scrollabile.
 
 ---
 
 ### Pannello destro
 
-* Grafico prezzo + Bollinger
+* Grafico prezzo + Bollinger Bands
 * Grafico MACD
-* Tabella ultime 20 candele
-* Log eventi
+* Tabella ultime candele
+* Log eventi in tempo reale
+
+---
+
+## ❌ Cosa questo tool NON fa
+
+* Non è un bot di trading
+* Non apre né chiude posizioni
+* Non fornisce segnali finanziari
+* Non predice il futuro
+* Non garantisce movimenti di prezzo
+
+È uno **strumento di lettura strutturale del mercato**.
+
+---
+
+## 🧠 Filosofia del progetto
+
+I mercati non si muovono solo per indicatori.
+
+Si muovono per:
+
+* gestione del rischio
+* gestione della liquidità
+* gestione del tempo
+
+Questo tool nasce dall’osservazione ripetuta di fasi in cui:
+
+* il momentum cambia
+* ma il prezzo viene temporaneamente trattenuto
+
+L’obiettivo non è anticipare il mercato,
+ma **comprendere il comportamento interno del prezzo**.
 
 ---
 
 ## 🧪 Requisiti
 
 * Windows 10 / 11
-* Python **3.10+**
+* Python 3.10+
 * Connessione Internet
 
 ---
 
-## 📦 Installazione
+## ▶️ Avvio
 
-```powershell
+```bash
 pip install -r requirements.txt
-```
-
----
-
-## ▶ Avvio
-
-```powershell
 python main.py
 ```
 
-Oppure doppio click su:
-
-```
-run.bat
-```
-
----
-
-## 🔐 Sicurezza
-
-* Nessuna API key
-* Nessun trading automatico
-* Nessuna operazione su account
-* Solo dati pubblici OHLCV
-
-Tool **100% osservativo**.
+Oppure utilizzare `run.bat`.
 
 ---
 
 ## ⚠️ Disclaimer
 
-Questo software:
+Questo progetto è fornito esclusivamente a scopo educativo e di analisi del mercato.
+Non costituisce consulenza finanziaria.
 
-* **non fornisce segnali finanziari**
-* **non è un bot di trading**
-* **non garantisce risultati**
-
-È uno strumento di **lettura strutturale del mercato**, pensato per supportare il ragionamento del trader.
-
----
-
-## 🧠 Filosofia del tool
-
-> “Il prezzo mente spesso.
-> La volatilità e il tempo mentono molto meno.”
-
-Questo strumento nasce per osservare:
-
-* quando il mercato **non può scendere**
-* quando **non vuole ancora salire**
-* quando sta **comprando tempo**
-
----
-
-## 📌 Roadmap (facoltativa)
-
-* [ ] modalità multi-timeframe
-* [ ] alert breakout + retest
-* [ ] profili di mercato (London / NY)
-* [ ] export log
-* [ ] versione .exe standalone
+L’uso è a totale responsabilità dell’utente.
 
